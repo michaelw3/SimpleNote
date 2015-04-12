@@ -3,6 +3,7 @@ package com.wernerappshop.simplenote;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.text.Layout;
 import android.view.Menu;
@@ -12,19 +13,22 @@ import android.view.MenuItem;
 
 
 public class MainActivity extends ActionBarActivity {
-    DrawerFragment mDrawerToggle;
+    private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.fragment_drawer);
         // Set the ActionBar
 
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
-        mDrawerLayout = (DrawerLayout) findViewById(R.layout.fragment_drawer);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.my_drawer_layout);
         mDrawerToggle= new ActionBarDrawerToggle(this, mDrawerLayout,mToolbar, R.string.app_name, R.string.app_name);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        mDrawerToggle.syncState();
         // Set an OnMenuItemClickListener to handle menu item clicks
         mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
